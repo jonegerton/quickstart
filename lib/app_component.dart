@@ -2,6 +2,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
 import 'src/heroes_component.dart';
+import 'src/hero_detail_component.dart';
 import 'src/dashboard_component.dart';
 import 'src/hero_service.dart';
 
@@ -17,6 +18,7 @@ import 'src/hero_service.dart';
     </nav>
     <router-outlet></router-outlet>
   ''',
+  styleUrls: const ['app_component.css']
 )
 
 @RouteConfig(const [
@@ -29,6 +31,11 @@ import 'src/hero_service.dart';
     path: '/dashboard',
     name: 'Dashboard',
     component: DashboardComponent,
+  ),
+  const Route(
+    path: 'detail/:id',
+    name: 'HeroDetail',
+    component: HeroDetailComponent
   ),
   const Redirect(
       path: '/',
