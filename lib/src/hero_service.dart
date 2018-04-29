@@ -28,7 +28,7 @@ class HeroService {
     } catch (e) {
       throw _handleError(e);
     }
-  };
+  }
 
   dynamic _extractData(Response resp) => JSON.decode(resp.body)['data'];
 
@@ -55,6 +55,25 @@ class HeroService {
       final response =
       await _http.put(url, headers: _headers, body: JSON.encode(hero));
       return new Hero.fromJson(_extractData(response));
+    } catch (e) {
+      throw _handleError(e);
+    }
+  }
+
+  Future<Hero> create(String name) async {
+    try {
+      final response = await _http.post(_heroesUrl,
+          headers: _headers, body: JSON.encode({'name': name}));
+      return new Hero.fromJson(_extractData(response));
+    } catch (e) {
+      throw _handleError(e);
+    }
+  }
+
+  Future<Null> delete(int id) async {
+    try {
+      final url = '$_heroesUrl/$id';
+      await _http.delete(url, headers: _headers);
     } catch (e) {
       throw _handleError(e);
     }
